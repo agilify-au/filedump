@@ -7,10 +7,10 @@ Source can be compiled on any of these platforms, using an appropriate C compile
 * On Linux, GCC
 * On Windows, Microsoft Visual C++
 
-Execute the filedump utility to see usage information:
+Execute the filedump utility with no parameters to see usage information:
 
 ```
-$ filedump
+$ #filedump#
 Usage: filedump [options] file        (use "-" for standard input)
 
 Display options:
