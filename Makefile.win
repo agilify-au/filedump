@@ -1,0 +1,60 @@
+# ---------------------------------------------------------------------------
+# MIT License
+#
+# Copyright (c) 2023-2026 Agilify Strategy and Innovation Pty Limited
+#
+# Permission is hereby granted, free of charge, to any person obtaining a
+# copy of this software and associated documentation files (the "Software"),
+# to deal in the Software without restriction, including without limitation
+# the rights to use, copy, modify, merge, publish, distribute, sublicense,
+# and/or sell copies of the Software, and to permit persons to whom the
+# Software is furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice shall be included in
+# all copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
+# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+# IN THE SOFTWARE.
+# ---------------------------------------------------------------------------
+
+# ---------------------------------------------------------------------------
+# Windows / Microsoft Visual C++      build:  nmake /f Makefile.win
+#                                     clean:  nmake /f Makefile.win clean
+#
+# Run from a "x64 Native Tools Command Prompt for VS 2022" (or x86) so that
+# cl.exe and the Windows SDK headers are on PATH/INCLUDE.
+#
+# NOTE: /TC ("treat as C") goes only on the /c compile steps.  It must NOT
+# appear on the link step, because /TC makes cl treat *every* named file --
+# including the .obj files -- as C source, and it then tries to "compile"
+# the binary objects (the cause of the C3872 / C2059 errors).  The link
+# step therefore uses LDFLAGS, which has no /TC.
+#
+# /MT statically links the C runtime into the .exe.  This makes the binary
+# self-contained: it runs on any Windows 10/11 (and older) with NO Visual
+# C++ Redistributable installed.  Drop /MT (or use /MD) to link the runtime
+# dynamically, which yields a smaller .exe but requires vcruntime140.dll
+# from the VC++ Redistributable on the target machine.
+# ---------------------------------------------------------------------------
+CC      = cl
+CFLAGS  = /nologo /TC /O2 /W3 /MT
+LDFLAGS = /nologo
+TARGET  = filedump.exe
+OBJS    = dump.obj filedump.obj
+
+$(TARGET): $(OBJS)
+	$(CC) $(LDFLAGS) /Fe$(TARGET) $(OBJS)
+
+dump.obj: dump.c dump.h
+	$(CC) $(CFLAGS) /c dump.c
+
+filedump.obj: filedump.c dump.h
+	$(CC) $(CFLAGS) /c filedump.c
+
+clean:
+	-del $(OBJS) $(TARGET)
