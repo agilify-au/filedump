@@ -10,7 +10,7 @@ Source can be compiled on any of these platforms, using an appropriate C compile
 Execute the filedump utility with no parameters to see usage information:
 
 ```
-$ #filedump#
+$ filedump
 Usage: filedump [options] file        (use "-" for standard input)
 
 Display options:
