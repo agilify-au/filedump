@@ -1,6 +1,6 @@
 # filedump - Cross-platform z/OS-leaning hex dump utility (and library routine)
 
-An executable for z/OS, Windows and Linux (x64) is provided.
+An executable for z/OS (OMVS), Windows and Linux (x64) is provided.
 
 Source can be compiled on any of these platforms, using an appropriate C compiler:
 * On z/OS, IBM XL C/C++
