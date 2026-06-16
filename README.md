@@ -1,11 +1,13 @@
 # filedump - Cross-platform z/OS-leaning hex dump utility (and library routine)
 
-Executable for z/OS, Windows and Linux (x64) is provided.
+An executable for z/OS, Windows and Linux (x64) is provided.
 
 Source can be compiled on any of these platforms, using an appropriate C compiler:
 * On z/OS, IBM XL C/C++
 * On Linux, GCC
 * On Windows, Microsoft Visual C++
+
+See dump.h for details on calling the dump() subroutine from your own application.
 
 Execute the filedump utility with no parameters to see usage information:
 
